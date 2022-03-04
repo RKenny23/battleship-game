@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Battleship Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../src/styles.css" />
+  </head>
+  <body>
+    <img class="title-img" src="./Battleship_clipart.svg" alt="" />
+    <h1 class="title">Battleship</h1>
+    <h2 class="game-text">Player 1, choose your ship locations.</h2>
+    <div class="game-container">
+      <div class="ships-container">
+        <div class="ship destroyer-container" draggable="true">
+          <div id="destroyer-0"></div>
+          <div id="destroyer-1"></div>
+        </div>
+        <div class="ship sub-container" draggable="true">
+          <div id="sub-0"></div>
+          <div id="sub-1"></div>
+          <div id="sub-2"></div>
+        </div>
+        <div class="ship cruiser-container" draggable="true">
+          <div id="cruiser-0"></div>
+          <div id="cruiser-1"></div>
+          <div id="cruiser-2"></div>
+        </div>
+        <div class="ship battleship-container" draggable="true">
+          <div id="battleship-0"></div>
+          <div id="battleship-1"></div>
+          <div id="battleship-2"></div>
+          <div id="battleship-3"></div>
+        </div>
+        <div class="ship carrier-container" draggable="true">
+          <div id="carrier-0"></div>
+          <div id="carrier-1"></div>
+          <div id="carrier-2"></div>
+          <div id="carrier-3"></div>
+          <div id="carrier-4"></div>
+        </div>
+      </div>
+      <div id="player-grid"></div>
+      <div id="opponent-grid"></div>
+    </div>
+    <footer>
+      <p>Created by Ryan Kenny</p>
+    </footer>
+    <script src="../src/index.js"></script>
+  </body>
+</html>

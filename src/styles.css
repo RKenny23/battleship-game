@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Bakbak One', cursive;
+}
+
+body {
+  background-color: lightskyblue;
+}
+
+.title {
+  text-align: center;
+  margin: 0 0 2rem 0;
+  font-size: 5rem;
+  font-weight: 200;
+}
+
+.title-img {
+  width: 400px;
+  display: block;
+  margin: 1rem auto 0 auto;
+}
+
+.game-container {
+  margin: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.game-text {
+  margin: 2rem;
+  text-align: center;
+  font-weight: 200;
+}
+
+#player-grid,
+#opponent-grid {
+  display: grid;
+  height: 400px;
+  min-width: 400px;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+}
+
+#opponent-grid {
+  margin-left: 5vw;
+}
+
+#opponent-grid .tile {
+  background-color: hsl(240, 100%, 65%);
+}
+
+.tile {
+  background-color: hsl(240, 100%, 25%);
+}
+
+.tile:hover,
+#opponent-grid .tile:hover {
+  background-color: hsl(240, 100%, 15%);
+  cursor: pointer;
+}
+
+.ships-container {
+  width: fit-content;
+  margin-right: 1rem;
+  display: grid;
+}
+
+.ship {
+  height: 40px;
+  display: flex;
+  gap: 2px;
+}
+
+.ship div {
+  background-color: black;
+  width: 40px;
+  height: 40px;
+}
+
+footer {
+  position: absolute;
+  bottom: 2vh;
+  text-align: center;
+  width: 100%;
+}
