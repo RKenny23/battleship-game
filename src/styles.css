@@ -9,6 +9,10 @@ body {
   background-color: lightskyblue;
 }
 
+h3 {
+  display: flex-start;
+}
+
 .title {
   text-align: center;
   margin: 0 0 2rem 0;
@@ -22,66 +26,151 @@ body {
   margin: 1rem auto 0 auto;
 }
 
-.game-container {
+#game-container {
   margin: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-.game-text {
-  margin: 2rem;
+#game-info h2 {
+  /* margin: 2rem; */
   text-align: center;
   font-weight: 200;
 }
 
-#player-grid,
-#opponent-grid {
-  display: grid;
-  height: 400px;
-  min-width: 400px;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 2px;
+#player-1 h2, #player-2 h2 {
+  margin: 0.5rem;
 }
 
-#opponent-grid {
-  margin-left: 5vw;
+#player-1 h2 {
+  text-align: right;
 }
 
-#opponent-grid .tile {
-  background-color: hsl(240, 100%, 65%);
+#player-2 h2 {
+  text-align: left;
 }
 
-.tile {
-  background-color: hsl(240, 100%, 25%);
+.grid {
+  background-color: cornflowerblue;
+  display: flex;
+  flex-wrap: wrap;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  border: 1px solid black;
 }
 
-.tile:hover,
-#opponent-grid .tile:hover {
+.row {
+  display: flex;
+  width: 100%;
+}
+
+.square {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.square:hover {
   background-color: hsl(240, 100%, 15%);
   cursor: pointer;
 }
 
-.ships-container {
-  width: fit-content;
-  margin-right: 1rem;
-  display: grid;
-}
-
-.ship {
-  height: 40px;
+.game-objects {
   display: flex;
-  gap: 2px;
 }
 
-.ship div {
+.ship-container {
+  margin: 0 5px;
+  padding: 1px;
+  background-color: lightblue;
+  /* display: flex; */
+
+  justify-content: center;
+  height: 200px;
+  width: 100px;
+  align-items: center;
+}
+
+/* .ship {
+  height: 30px;
+  display: flex;
+} */
+
+.destroyer-preview {
+  width: 20px;
+  height: 10px;
+  margin: 3px;
+}
+
+
+.submarine-preview {
+  width: 30px;
+  height: 10px;
+  margin: 3px;
+}
+
+.cruiser-preview {
+  width: 20px;
+  height: 10px;
+  margin: 3px;
+}
+
+.battleship-preview {
+  width: 20px;
+  height: 10px;
+  margin: 3px;
+}
+
+.carrier-preview {
+  width: 50px;
+  height: 10px;
+  margin: 3px;
+}
+
+.destroyer {
+  background-color: black;
+}
+
+.submarine {
+  background-color: red;
+}
+
+.cruiser {
+  background-color: purple;
+
+}
+
+.battleship {
+  background-color: orange;
+
+}
+
+.carrier {
+  background-color: green;
+
+}
+/* .ship div {
   background-color: black;
   width: 40px;
   height: 40px;
-}
+} */
 
+/* .row {
+  background-color: black;
+} */
 footer {
   position: absolute;
   bottom: 2vh;
   text-align: center;
   width: 100%;
+}
+
+.ship-cell {
+  background-color: red;
+}
+
+.grid.ship-placed {
+  background-color: lightblue;
 }

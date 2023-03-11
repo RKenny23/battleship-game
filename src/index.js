@@ -1,16 +1,18 @@
-const playerGrid = document.getElementById('player-grid');
-const opponentGrid = document.getElementById('opponent-grid');
-
-const tiles = [];
-
-function createGameBoard(div) {
-  for (let i = 0; i < 100; i++) {
-    const tile = document.createElement('div');
-    tile.dataset.id = i;
-    div.appendChild(tile).className = 'tile';
-    tiles.push(tile);
+function createGrid(gridId) {
+  const grid = document.getElementById(gridId);
+  for (let i = 0; i < 10; i++) {
+    const row = document.createElement("div");
+    row.className = "row";
+    for (let j = 0; j < 10; j++) {
+      const square = document.createElement("div");
+      square.className = "square";
+      row.appendChild(square);
+    }
+    grid.appendChild(row);
   }
 }
 
-createGameBoard(playerGrid);
-createGameBoard(opponentGrid);
+createGrid("player-1-grid");
+createGrid("player-2-grid");
+
+
