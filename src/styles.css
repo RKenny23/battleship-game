@@ -32,6 +32,10 @@ h3 {
   justify-content: space-evenly;
 }
 
+#buttons {
+  text-align: center;
+}
+
 #game-info h2 {
   /* margin: 2rem; */
   text-align: center;
@@ -78,19 +82,19 @@ h3 {
 }
 
 .game-objects {
-  display: flex;
+  /* display: flex; */
+  /* text-align: center; */
 }
 
 .ship-container {
   margin: 0 5px;
   padding: 1px;
   background-color: lightblue;
-  /* display: flex; */
-
-  justify-content: center;
-  height: 200px;
-  width: 100px;
-  align-items: center;
+  /* justify-items: right; */
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  /* align-items: center; */
 }
 
 /* .ship {
@@ -102,8 +106,8 @@ h3 {
   width: 20px;
   height: 10px;
   margin: 3px;
+  transform: rotate(90);
 }
-
 
 .submarine-preview {
   width: 30px;
