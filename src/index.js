@@ -1,36 +1,64 @@
-function createGrid(gridId) {
-  const grid = document.getElementById(gridId);
-  for (let i = 0; i < 10; i++) {
-    const row = document.createElement('div');
-    row.className = 'row';
-    for (let j = 0; j < 10; j++) {
-      const square = document.createElement('div');
-      square.className = 'square';
-      row.appendChild(square);
+const width = 10;
+
+function createGrid(user) {
+  const grid = document.getElementById(user);
+
+  for (let i = 0; i < width * width; i++) {
+    const square = document.createElement('div');
+    square.className = 'square';
+    square.id = i;
+    grid.appendChild(square);
     }
-    grid.appendChild(row);
-  }
 }
 
-createGrid('player-1-grid');
-createGrid('player-2-grid');
+createGrid('player-grid');
+createGrid('computer-grid');
 
 const shipContainer = document.querySelector('.ship-container');
 const flipButton = document.querySelector('#flip-button');
 
+
+let angle = 0;
 function flip() {
   const optionShips = Array.from(shipContainer.children);
-
+  angle = angle === 0 ? 90 : 0
   optionShips.forEach(
     (optionShip) =>
-      (optionShip.getElementsByClassName.transform = `rotate(90deg)`)
+      (optionShip.style.transform = `rotate(${angle}deg)`)
   );
-
-  optionShips.forEach(
-    (optionShip) => (optionShip.getElementsByClassName.transform = 'scale(2)')
-  );
-
-  console.log(Array.from(shipContainer.children));
 }
 
 flipButton.addEventListener('click', flip);
+
+class Ship {
+  constructor(name, length) {
+    this.name = name
+    this.length = length
+  }
+}
+
+const destroyer = new Ship('destroyer', 2)
+const submarine = new Ship('submarine', 3)
+const cruiser = new Ship('cruiser', 3)
+const battleship = new Ship('battleship', 4)
+const carrier = new Ship('carrier', 5)
+
+const ships = [destroyer, submarine, cruiser, battleship, carrier]
+
+function addShipPiece(ship) {
+  const allBoardBlocks = document.querySelectorAll('#computer-grid div')
+  let randomBoolean = Math.random() < 0.5
+  let isHorizontal = true
+  let randomStartIndex = Math.floor(Math.random() * width * width)
+  console.log(randomStartIndex)
+
+  let shipBlocks = []
+
+  for (let i = 0; i < ship.length; i++) {
+    if (isHorizontal) {
+      console.log(allBoardBlocks[Number(randomStartIndex) + i])
+    }
+  }
+}
+
+addShipPiece()

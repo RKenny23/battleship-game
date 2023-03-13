@@ -7,15 +7,21 @@
 
 body {
   background-color: lightskyblue;
+  text-align: center;
 }
 
 h3 {
   display: flex-start;
 }
 
+button {
+  width: 60px;
+  margin: 10px auto;
+}
+
 .title {
-  text-align: center;
-  margin: 0 0 2rem 0;
+  /* text-align: center; */
+  margin: 0 0 0rem 0;
   font-size: 5rem;
   font-weight: 200;
 }
@@ -26,31 +32,33 @@ h3 {
   margin: 1rem auto 0 auto;
 }
 
+#start-button {
+  /* margin-left: 50%; */
+  /* text-align: center; */
+}
+
 #game-container {
   margin: 2rem;
+  margin-top: 0;
   display: flex;
   justify-content: space-evenly;
 }
 
-#buttons {
-  text-align: center;
-}
 
 #game-info h2 {
-  /* margin: 2rem; */
   text-align: center;
   font-weight: 200;
 }
 
-#player-1 h2, #player-2 h2 {
+#player h2, #computer h2 {
   margin: 0.5rem;
 }
 
-#player-1 h2 {
+#player h2 {
   text-align: right;
 }
 
-#player-2 h2 {
+#computer h2 {
   text-align: left;
 }
 
@@ -58,16 +66,16 @@ h3 {
   background-color: cornflowerblue;
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
-  height: 300px;
+  width: 302px;
+  height: 302px;
   margin: 0 auto;
   border: 1px solid black;
 }
 
-.row {
+/* .row {
   display: flex;
   width: 100%;
-}
+} */
 
 .square {
   width: 30px;
@@ -82,31 +90,27 @@ h3 {
 }
 
 .game-objects {
-  /* display: flex; */
-  /* text-align: center; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .ship-container {
-  margin: 0 5px;
   padding: 1px;
   background-color: lightblue;
   /* justify-items: right; */
-  height: fit-content;
-  width: fit-content;
+  height: 80px;
+  /* width: fit-content; */
   display: flex;
-  /* align-items: center; */
+  align-items: center;
+  justify-content: center;
 }
 
-/* .ship {
-  height: 30px;
-  display: flex;
-} */
 
 .destroyer-preview {
   width: 20px;
   height: 10px;
   margin: 3px;
-  transform: rotate(90);
 }
 
 .submarine-preview {
@@ -155,20 +159,13 @@ h3 {
   background-color: green;
 
 }
-/* .ship div {
-  background-color: black;
-  width: 40px;
-  height: 40px;
-} */
 
-/* .row {
-  background-color: black;
-} */
 footer {
-  position: absolute;
-  bottom: 2vh;
+  /* position: absolute; */
+  /* bottom: 5vh; */
   text-align: center;
   width: 100%;
+  margin-bottom: 2rem;
 }
 
 .ship-cell {
