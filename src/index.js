@@ -70,18 +70,21 @@ function addShipPiece(ship) {
   let valid;
 
   if (isHorizontal) {
-    shipBlocks.every((_shipBlock, index) => {
-      valid =
-        shipBlocks[0].id % width !== width - (shipBlocks.length - (index + 1));
-    });
+    shipBlocks.every(
+      (_shipBlock, index) =>
+        (valid =
+          shipBlocks[0].id % width !==
+          width - (shipBlocks.length - (index + 1)))
+    );
   } else {
-    shipBlocks.every((_shipBlock, index) => {
-      valid = shipBlocks[0].id < 90 + (width * index + 1);
-    });
+    shipBlocks.every(
+      (_shipBlock, index) =>
+        (valid = shipBlocks[0].id < 90 + (width * index + 1))
+    );
   }
 
-  const notTaken = shipBlocks.every((shipBlock) =>
-    shipBlock.classList.contains('taken')
+  const notTaken = shipBlocks.every(
+    (shipBlock) => !shipBlock.classList.contains('taken')
   );
 
   if (valid && notTaken) {
