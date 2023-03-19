@@ -1,3 +1,7 @@
+const startButton = document.querySelector('#start-button');
+const infoDisplay = document.querySelector('#info');
+const turnDisplay = document.querySelector('#turn-display');
+
 // Creates gameboards
 const width = 10;
 
@@ -169,5 +173,49 @@ function highLightArea(startIndex, ship) {
       shipBlock.classList.add('hover');
       setTimeout(() => shipBlock.classList.remove('hover'), 500);
     });
+  }
+}
+
+let gameOver = false;
+let playerTurn;
+
+// Start Game
+
+function startGame() {
+  if (shipContainer.children.length === 0) {
+    infoDisplay.textContent = 'Please place all your pieces first!';
+  } else {
+    const allBoardBlocks = document.querySelectorAll('#computer-grid div');
+    allBoardBlocks.forEach((block) =>
+      block.addEventListener('click', handleClick)
+    );
+  }
+}
+
+startButton.addEventListener('click', startGame);
+
+let playerHits = [];
+let computerHits = [];
+
+function handleClick(e) {
+  if (!gameOver) {
+    if (e.target.classList.contains('taken')) {
+      e.target.classList.add('boom');
+      infoDisplay.textContent = "You hit the computer's ship!";
+      let classes = Array.from(e.target.classList);
+      classes.filter((className) => className !== 'square');
+      classes.filter((className) => className !== 'boom');
+      classes.filter((className) => className !== 'taken');
+      playerHits.push(...classes);
+      console.log(playerHits);
+    }
+    if (!e.target.classList.contains('taken')) {
+      infoDisplay.textContent = 'Missed';
+      e.target.classList.add('empty');
+    }
+    playerTurn = false;
+    const allBoardBlocks = document.querySelectorAll('#computer-grid div');
+    allBoardBlocks.forEach((block) => block.replaceWith(block.cloneNode(true)));
+    setTimeout(computerGo, 3000);
   }
 }
