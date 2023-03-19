@@ -1,3 +1,4 @@
+// Creates gameboards
 const width = 10;
 
 function createGrid(user) {
@@ -14,6 +15,7 @@ function createGrid(user) {
 createGrid('player-grid');
 createGrid('computer-grid');
 
+// Handles ship flipping within the container
 const shipContainer = document.querySelector('.ship-container');
 const flipButton = document.querySelector('#flip-button');
 
@@ -28,6 +30,7 @@ function flip() {
 
 flipButton.addEventListener('click', flip);
 
+// Creates new ships
 class Ship {
   constructor(name, length) {
     this.name = name;
@@ -40,18 +43,13 @@ const submarine = new Ship('submarine', 3);
 const cruiser = new Ship('cruiser', 3);
 const battleship = new Ship('battleship', 4);
 const carrier = new Ship('carrier', 5);
-
-const ships = [destroyer, submarine, cruiser, battleship, carrier];
 let notDropped;
 
-function addShipPiece(user, ship, startId) {
-  const allBoardBlocks = document.querySelectorAll(`#${user}-grid div`);
-  let randomBoolean = Math.random() < 0.5;
-  let isHorizontal = user === 'player' ? angle === 0 : randomBoolean;
-  let randomStartIndex = Math.floor(Math.random() * width * width);
+// Adds ships to an array
+const ships = [destroyer, submarine, cruiser, battleship, carrier];
 
-  let startIndex = startId ? startId : randomStartIndex;
-
+// Checks for valid ship placement
+function getValidity(allBoardBlocks, isHorizontal, startIndex, ship) {
   let validStart = isHorizontal
     ? startIndex <= width * width - ship.length
       ? startIndex
@@ -90,20 +88,38 @@ function addShipPiece(user, ship, startId) {
     (shipBlock) => !shipBlock.classList.contains('taken')
   );
 
+  return { shipBlocks, valid, notTaken };
+}
+
+function addShipPiece(user, ship, startId) {
+  const allBoardBlocks = document.querySelectorAll(`#${user}-grid div`);
+  let randomBoolean = Math.random() < 0.5;
+  let isHorizontal = user === 'player' ? angle === 0 : randomBoolean;
+  let randomStartIndex = Math.floor(Math.random() * width * width);
+
+  let startIndex = startId ? startId : randomStartIndex;
+
+  const { shipBlocks, valid, notTaken } = getValidity(
+    allBoardBlocks,
+    isHorizontal,
+    startIndex,
+    ship
+  );
+
   if (valid && notTaken) {
     shipBlocks.forEach((shipBlock) => {
       shipBlock.classList.add(ship.name);
       shipBlock.classList.add('taken');
     });
   } else {
-    if (user === 'computer') addShipPiece('computer', ship);
+    if (user === 'computer') addShipPiece(user, ship, startId);
     if (user === 'player') notDropped = true;
   }
 }
 
 ships.forEach((ship) => addShipPiece('computer', ship));
 
-// Drag player ships
+// Handles drag and drop
 let draggedShip;
 const optionShips = Array.from(shipContainer.children);
 optionShips.forEach((optionShip) =>
@@ -123,6 +139,8 @@ function dragStart(e) {
 
 function dragOver(e) {
   e.preventDefault();
+  const ship = ships[draggedShip.id];
+  highLightArea(e.target.id, ship);
 }
 
 function dropShip(e) {
@@ -131,5 +149,25 @@ function dropShip(e) {
   addShipPiece('player', ship, startId);
   if (!notDropped) {
     draggedShip.remove();
+  }
+}
+
+// Add highlight to board on drag
+function highLightArea(startIndex, ship) {
+  const allBoardBlocks = document.querySelectorAll('#player-grid div');
+  let isHorizontal = angle === 0;
+
+  const { shipBlocks, valid, notTaken } = getValidity(
+    allBoardBlocks,
+    isHorizontal,
+    startIndex,
+    ship
+  );
+
+  if (valid && notTaken) {
+    shipBlocks.forEach((shipBlock) => {
+      shipBlock.classList.add('hover');
+      setTimeout(() => shipBlock.classList.remove('hover'), 500);
+    });
   }
 }

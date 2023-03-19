@@ -176,10 +176,15 @@ footer {
   margin-bottom: 2rem;
 }
 
-.ship-cell {
+.boom {
   background-color: red;
 }
 
-.grid.ship-placed {
-  background-color: lightblue;
+.hover {
+  background-color: grey;
+
+}
+
+.empty {
+  background-color: grey;
 }
