@@ -182,13 +182,14 @@ let playerTurn;
 // Start Game
 
 function startGame() {
-  if (shipContainer.children.length === 0) {
+  if (shipContainer.children.length != 0) {
     infoDisplay.textContent = 'Please place all your pieces first!';
   } else {
     const allBoardBlocks = document.querySelectorAll('#computer-grid div');
     allBoardBlocks.forEach((block) =>
       block.addEventListener('click', handleClick)
     );
+    infoDisplay.textContent = 'Fire away!';
   }
 }
 
@@ -196,6 +197,8 @@ startButton.addEventListener('click', startGame);
 
 let playerHits = [];
 let computerHits = [];
+const playerSunkShips = [];
+const computerSunkShips = [];
 
 function handleClick(e) {
   if (!gameOver) {
@@ -203,11 +206,11 @@ function handleClick(e) {
       e.target.classList.add('boom');
       infoDisplay.textContent = "You hit the computer's ship!";
       let classes = Array.from(e.target.classList);
-      classes.filter((className) => className !== 'square');
-      classes.filter((className) => className !== 'boom');
-      classes.filter((className) => className !== 'taken');
+      classes = classes.filter((className) => className !== 'square');
+      classes = classes.filter((className) => className !== 'boom');
+      classes = classes.filter((className) => className !== 'taken');
       playerHits.push(...classes);
-      console.log(playerHits);
+      checkScore('player', playerHits, playerSunkShips);
     }
     if (!e.target.classList.contains('taken')) {
       infoDisplay.textContent = 'Missed';
@@ -218,4 +221,80 @@ function handleClick(e) {
     allBoardBlocks.forEach((block) => block.replaceWith(block.cloneNode(true)));
     setTimeout(computerGo, 3000);
   }
+}
+
+function computerGo() {
+  if (!gameOver) {
+    turnDisplay.textContent = 'Computers turn';
+    infoDisplay.textContent = 'The computer is thinking...';
+
+    setTimeout(() => {
+      let randomGo = Math.floor(Math.random() * width * width);
+      const allBoardBlocks = document.querySelectorAll('#player-grid div');
+
+      if (
+        allBoardBlocks[randomGo].classList.contains('taken') &&
+        allBoardBlocks[randomGo].classList.contains('boom')
+      ) {
+        computerGo();
+        return;
+      } else if (
+        allBoardBlocks[randomGo].classList.contains('taken') &&
+        !allBoardBlocks[randomGo].classList.contains('boom')
+      ) {
+        allBoardBlocks[randomGo].classList.add('boom');
+        infoDisplay.textContent = 'The computer hit your ship!';
+        let classes = Array.from(allBoardBlocks[randomGo].classList);
+        classes = classes.filter((className) => className !== 'square');
+        classes = classes.filter((className) => className !== 'boom');
+        classes = classes.filter((className) => className !== 'taken');
+        computerHits.push(...classes);
+        checkScore('computer', computerHits, computerSunkShips);
+      } else {
+        infoDisplay.textContent = 'Nothing hit this time.';
+        allBoardBlocks[randomGo].classList.add('empty');
+      }
+    }, 3000);
+
+    setTimeout(() => {
+      playerTurn = true;
+      turnDisplay.textContent = 'Your go';
+      infoDisplay.textContent = 'Please take your turn.';
+      const allBoardBlocks = document.querySelectorAll('#computer-grid div');
+      allBoardBlocks.forEach((block) =>
+        block.addEventListener('click', handleClick)
+      );
+    }, 6000);
+  }
+}
+
+function checkScore(user, userHits, userSunkShips) {
+  function checkShip(shipName, shipLength) {
+    if (
+      userHits.filter((storedShipName) => storedShipName === shipName)
+        .length === shipLength
+    ) {
+      infoDisplay.textContent = `You sunk the ${user}'s ${shipName}`;
+      if (user === 'player') {
+        playerHits = userHits.filter(
+          (storedShipName) => storedShipName !== shipName
+        );
+      }
+      if (user === 'computer') {
+        computerHits = userHits.filter(
+          (storedShipName) => storedShipName !== shipName
+        );
+      }
+      userSunkShips.push(shipName);
+    }
+  }
+
+  checkShip('destroyer', 2);
+  checkShip('submarine', 3);
+  checkShip('cruiser', 3);
+  checkShip('battleship', 4);
+  checkShip('carrier', 5);
+
+  console.log('playerHits', playerHits);
+  console.log('playerSunkShips', playerSunkShips);
 }
