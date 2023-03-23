@@ -169,15 +169,13 @@ const carrier = new Ship('carrier', 5); */
 }
 
 footer {
-  /* position: absolute; */
-  /* bottom: 5vh; */
   text-align: center;
   width: 100%;
   margin-bottom: 2rem;
 }
 
 .boom {
-  background-color: red;
+  background-color: red !important;
 }
 
 .hover {
@@ -186,5 +184,13 @@ footer {
 }
 
 .empty {
-  background-color: grey;
+  background-color: grey !important;
+}
+
+#computer-grid .destroyer,
+#computer-grid .submarine,
+#computer-grid .cruiser,
+#computer-grid .battleship,
+#computer-grid .carrier {
+  background-color: cornflowerblue;
 }

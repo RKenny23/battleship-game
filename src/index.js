@@ -182,14 +182,18 @@ let playerTurn;
 // Start Game
 
 function startGame() {
-  if (shipContainer.children.length != 0) {
-    infoDisplay.textContent = 'Please place all your pieces first!';
-  } else {
-    const allBoardBlocks = document.querySelectorAll('#computer-grid div');
-    allBoardBlocks.forEach((block) =>
-      block.addEventListener('click', handleClick)
-    );
-    infoDisplay.textContent = 'Fire away!';
+  if (playerTurn === undefined) {
+    if (shipContainer.children.length != 0) {
+      infoDisplay.textContent = 'Please place all your pieces first!';
+    } else {
+      const allBoardBlocks = document.querySelectorAll('#computer-grid div');
+      allBoardBlocks.forEach((block) =>
+        block.addEventListener('click', handleClick)
+      );
+      playerTurn = true;
+      infoDisplay.textContent = 'Your go';
+      infoDisplay.textContent = 'Fire away!';
+    }
   }
 }
 
@@ -297,4 +301,14 @@ function checkScore(user, userHits, userSunkShips) {
 
   console.log('playerHits', playerHits);
   console.log('playerSunkShips', playerSunkShips);
+
+  if (playerSunkShips.length === 5) {
+    infoDisplay.textContent = 'You sunk all the computers ships. You won!';
+    gameOver = true;
+  }
+
+  if (computerSunkShips.length === 5) {
+    infoDisplay.textContent = 'The computer has sunk all your ships. You lost!';
+    gameOver = true;
+  }
 }
