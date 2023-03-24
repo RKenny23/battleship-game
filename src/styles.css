@@ -10,13 +10,14 @@ body {
   text-align: center;
 }
 
-h3 {
+/* h3 {
   display: flex-start;
-}
+} */
 
 button {
   width: 60px;
   margin: 10px auto;
+  height: 30px;
 }
 
 .title {
@@ -38,10 +39,10 @@ button {
 }
 
 #game-container {
-  margin: 2rem;
-  margin-top: 0;
+  margin: 1rem 2rem;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-items: center;
 }
 
 
@@ -54,14 +55,6 @@ button {
   margin: 0.5rem;
 }
 
-#player h2 {
-  text-align: right;
-}
-
-#computer h2 {
-  text-align: left;
-}
-
 .grid {
   background-color: cornflowerblue;
   display: flex;
@@ -72,10 +65,16 @@ button {
   border: 1px solid black;
 }
 
-/* .row {
+#user-grids {
   display: flex;
-  width: 100%;
-} */
+  justify-content: center;
+  gap: 2rem;
+}
+
+#ship-command {
+  display: flex;
+  flex-direction: column;
+}
 
 .square {
   width: 30px;
@@ -95,15 +94,15 @@ button {
   flex-direction: column;
 }
 
-.ship-container {
-  padding: 1px;
+#ship-container {
   background-color: lightblue;
-  /* justify-items: right; */
-  height: 80px;
-  /* width: fit-content; */
+  height: 40px;
+  width: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 1rem;
 }
 
 
@@ -138,12 +137,6 @@ button {
   height: 10px;
   margin: 3px;
 }
-
-/* const destroyer = new Ship('destroyer', 2);
-const submarine = new Ship('submarine', 3);
-const cruiser = new Ship('cruiser', 3);
-const battleship = new Ship('battleship', 4);
-const carrier = new Ship('carrier', 5); */
 
 .destroyer {
   background-color: black;

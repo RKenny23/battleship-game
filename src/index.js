@@ -20,7 +20,7 @@ createGrid('player-grid');
 createGrid('computer-grid');
 
 // Handles ship flipping within the container
-const shipContainer = document.querySelector('.ship-container');
+const shipContainer = document.querySelector('#ship-container');
 const flipButton = document.querySelector('#flip-button');
 
 let angle = 0;
